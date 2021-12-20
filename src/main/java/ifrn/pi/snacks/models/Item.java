@@ -10,17 +10,13 @@ import javax.persistence.Id;
 @Entity
 public class Item {
 	
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	private String nome;
-	
 	private Double preco;
-	
 	private String descricao;
-	
 	private File foto;
 
 	public Long getId() {
@@ -59,11 +55,4 @@ public class Item {
 		this.foto = foto;
 	}
 
-	
-	
-	
-	
-	
-	
-	
 }
