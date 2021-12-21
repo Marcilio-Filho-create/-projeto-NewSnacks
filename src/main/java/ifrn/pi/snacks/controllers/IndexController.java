@@ -8,7 +8,12 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public String index() {
-		return "home";
+		return "/LoginNewSnacks/Login";
+	}
+	
+	@RequestMapping("/newsnacks/cardapio")
+	public String cardapio() {
+		return "/LoginNewSnacks/Cardapio";
 	}
 	
 }
