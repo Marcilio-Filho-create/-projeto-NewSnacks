@@ -1,7 +1,5 @@
 package ifrn.pi.snacks.models;
 
-import java.io.File;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +15,7 @@ public class Item {
 	private String nome;
 	private Double preco;
 	private String descricao;
-	private File foto;
+	private String tipo;
 
 	public Long getId() {
 		return id;
@@ -47,12 +45,12 @@ public class Item {
 		this.descricao = descricao;
 	}
 
-	public File getFoto() {
-		return foto;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setFoto(File foto) {
-		this.foto = foto;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }
