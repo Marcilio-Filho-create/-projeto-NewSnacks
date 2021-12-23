@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+	<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<title>Itens</title>
+	</head>
+	<body>
+	
+		<div th:replace="~{menu :: menu}"></div>
+		<div class="container">
+			<h1>Adicionar Item</h1>
+		
+			<form action="/snacks/salvarItem" method="post" th:object="${item}">
+				<div>
+					<input type="hidden" th:field="*{id}" readonly="readonly">
+				</div>
+				<div>
+					<label>Nome: </label>
+					<input type="text" th:field="*{nome}">
+				</div>
+				<div>
+					<label>Descrição: </label>
+					<input type="text" th:field="*{descricao}">
+				</div>
+				<div>
+					<label>Preço: </label>
+					R$<input type="number" th:field="*{preco}">
+				</div>
+				<div>
+					<p>
+						<label>
+							<input class="with-gap" name="tipoItem" type="radio" th:field="*{tipo}" value="bebida"/>
+							<span>Bebida</span>
+						</label>
+					</p>
+					<p>
+						<label>
+							<input class="with-gap" name="tipoItem" type="radio" th:field="*{tipo}" value="sanduiche"/>
+							<span>Sanduíche</span>
+						</label>
+					</p>
+					<p>
+						<label>
+							<input class="with-gap" name="tipoItem" type="radio" th:field="*{tipo}" value="prato"/>
+							<span>Prato</span>
+						</label>
+					</p>
+					<p>
+						<label>
+							<input class="with-gap" name="tipoItem" type="radio" th:field="*{tipo}" value="pizza"/>
+							<span>Pizza</span>
+						</label>
+					</p>
+				</div>
+				<div>
+					<button type="submit" class="btn">Salvar</button>
+					<button type="reset" class="btn">Limpar</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
