@@ -27,4 +27,13 @@ public class SnacksController {
 		ir.save(item);
 		return "redirect:/snacks/addItem";
 	}
+	
+	@GetMapping("/cadastrar")
+	public String cadastrar(){
+		return "cadastro";
+	}
+	@GetMapping("/logar")
+	public String logar(){
+		return "login";
+	}
 }

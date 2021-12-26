@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+body{
+	background-image:url("fotos/fundo.jpg");
+	background-color:#ffffff;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color:rgb(0, 0, 0);
+	font-family: Arial, sans-serif;
+}
+
+nav#logo{
+	font-family:'Lobster', cursive;
+}
+a#nomeL{
+	margin-left: 35px;
+}
+li#menu{
+	margin-right: 35px;
+	font-size: 100pt;
+}
+div#titulo{
+	text-align: center;
+	font-family: 'Lobster', cursive;
+}
+div#login{
+	width: 500px;
+	height: 350px;
+	background-color: rgb(173, 233, 235);
+	font-family:'Lobster', cursive;
+	margin-top: 50px;
+	border-radius: 30px;
+	text-align: center;
+	position: relative;
+}
+form#interno{
+	padding: 0px 50px 0px 50px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+}
+
+label.inputName{
+	color: black;
+}
