@@ -17,15 +17,15 @@ public class Pedido {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	
 	private Long id;
-	
+
 	private Usuario cliente;
 
     private ArrayList<Item> itens;
     
 	private Double valortotal;
-
+	
 	private LocalDate data;
-
+	
 	private String endereco;
 
 	
