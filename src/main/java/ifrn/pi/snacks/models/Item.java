@@ -16,9 +16,23 @@ public class Item {
 	private Double preco;
 	private String descricao;
 	private String tipo;
+	private boolean status = false;
+	private String link; 
 
 	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	public String getNome() {
@@ -51,6 +65,20 @@ public class Item {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+	
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", nome=" + nome + ", preco=" + preco + ", descricao=" + descricao + ", tipo=" + tipo
+				+ ", status=" + status + ", link=" + link + "]";
 	}
 
 }

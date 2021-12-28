@@ -44,14 +44,33 @@ public class SnacksController {
 		return "login";
 	}
 	
-	@PostMapping("/salvarItem")
-	public ModelAndView salvarItem(Item item, RedirectAttributes attributes) {
+	@GetMapping("/cardapio")
+	public ModelAndView cardapio(){
 		ModelAndView md = new ModelAndView();
 		
-		ir.save(item);
-		md.setViewName("redirect:/snacks/addItem");
-		attributes.addFlashAttribute("mensagem", "Item adicionado a lista com sucesso!");
+		md.setViewName("cardapio");
+		List<Item> itens = ir.findAll();
+		md.addObject("itens", itens);
 		return md;
+	}
+	
+	@PostMapping("/salvarItem")
+	public String salvarItem(Item item, RedirectAttributes attributes) {
+		
+		if(item.getTipo() == "Bebida") {
+			item.setLink("");
+		}else if(item.getTipo() == "Sanduiche") {
+			item.setLink("https://media.istockphoto.com/vectors/burger-icon-vector-isolated-on-white-background-burger-sign-vector-id1029096298?k=20&m=1029096298&s=170667a&w=0&h=Cox0Ks6_3t5Jdju5r8lh6doGX9KegutP3tN-hGrEYW4=");
+		}else if(item.getTipo() == "Pizza") {
+			item.setLink("");
+		}else if(item.getTipo() == "Prato") {
+			item.setLink("");
+		}
+		
+		ir.save(item);
+		attributes.addFlashAttribute("mensagem", "Item adicionado a lista com sucesso!");
+		System.out.println(item);
+		return "redirect:/snacks/addItem";
 	}
 	
 	@GetMapping("/addItem/{id}/deletar")
@@ -66,21 +85,43 @@ public class SnacksController {
 		return "redirect:/snacks/addItem";
 	}
 	
-	/*@GetMapping("/addItem/{idI}/editar")
+	@GetMapping("/addItem/{id}/editarCardapio")
+	public String editarCardapio(@PathVariable Long id, RedirectAttributes attributes) {
+		Optional<Item> opt = ir.findById(id);
+		
+		if(!opt.isEmpty()) {
+			Item item = opt.get();
+			if(opt.get().getStatus() == true) {
+				item.setStatus(false);
+				ir.save(item);
+				attributes.addFlashAttribute("mensagem", "Item removido do cardápio com sucesso!");
+			}else if(opt.get().getStatus() == false) {
+				item.setStatus(true);
+				ir.save(item);
+				attributes.addFlashAttribute("mensagem", "Item adicionado ao cardápio com sucesso!");
+			}
+		}
+		
+		return "redirect:/snacks/addItem";
+	}
+	
+	@GetMapping("/addItem/{idI}/editar")
 	public ModelAndView selecionarItem(@PathVariable Long idI) {
 		ModelAndView md = new ModelAndView();
 		Optional<Item> opt = ir.findById(idI);
+
+		System.out.println(opt.get());
 		
 		if(opt.isEmpty()) {
 			md.setViewName("/snacks/addItem");
-			return md;
 		}
 		else {
 			md.setViewName("itensAdd");
 			md.addObject("item", opt.get());
 			List<Item> itens = ir.findAll();
 			md.addObject("itens", itens);
-			return md;
 		}
-	}*/
+		System.out.println(opt.get());
+		return md;
+	}
 }
