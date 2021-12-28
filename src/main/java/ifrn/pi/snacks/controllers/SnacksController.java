@@ -13,7 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ifrn.pi.snacks.models.Item;
+import ifrn.pi.snacks.models.Pedido;
 import ifrn.pi.snacks.repositories.ItemRepository;
+import ifrn.pi.snacks.repositories.PedidoRepository;
+
 
 @Controller
 @RequestMapping("/snacks")
@@ -21,7 +24,7 @@ public class SnacksController {
 	
 	@Autowired
 	private ItemRepository ir;
-	
+	private PedidoRepository pr;
 	
 	@GetMapping("/addItem")
 	public ModelAndView form(Item item) {
@@ -33,6 +36,19 @@ public class SnacksController {
 		
 		return md;
 	}
+	
+	
+	@GetMapping()
+	public ModelAndView listadepedidos() {
+		
+		List<Pedido> lista = pr.findAll();
+		ModelAndView mv = new ModelAndView("/lista");
+		mv.addObject("pedidos", lista);
+		return mv;
+		
+	}
+	
+	
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(){
