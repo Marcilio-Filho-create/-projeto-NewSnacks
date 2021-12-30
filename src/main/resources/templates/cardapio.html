@@ -7,11 +7,21 @@
 	    <title>Cardápio</title>
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    
+	    <style type="text/css">
+	    div#cardapio{
+	    	padding: 5px 5px 5px 5px;
+	    	background-color: rgb(43, 36, 141);
+			box-shadow: 5px 5px 3px;
+	    }
+	    
+	    
+	    </style>
 	</head>
 
 	<body>
 		<div th:replace="~{menu :: menu}"></div>
-			<div class="container">
+			<div class="container" id=cardapio>
 				<div class="row" style="margin-top:30px; size: 100px;">
 					<div class="col s3" th:each="i : ${itens}">
 						<div class="card">
@@ -22,7 +32,7 @@
 							</div>
 							<div class="card-content">
 			                    <p th:text="${i.descricao}">Hamburgão feito na hora</p>
-			                    <p>Preço: <span th:text="${i.preco}">10</span></p>
+			                    <p>Preço: R$ <span th:text="${i.preco}">10</span></p>
 				            </div>
 			            </div>
 			        </div>

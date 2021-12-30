@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 
@@ -17,10 +18,11 @@ public class Pedido {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	
 	private Long id;
-
+	
+	@ManyToOne
 	private Usuario cliente;
-
-    private ArrayList<Item> itens;
+	
+	private ArrayList<Item> itens;
     
 	private Double valortotal;
 	

@@ -73,14 +73,14 @@ public class SnacksController {
 	@PostMapping("/salvarItem")
 	public String salvarItem(Item item, RedirectAttributes attributes) {
 		
-		if(item.getTipo() == "Bebida") {
-			item.setLink("");
-		}else if(item.getTipo() == "Sanduiche") {
-			item.setLink("https://media.istockphoto.com/vectors/burger-icon-vector-isolated-on-white-background-burger-sign-vector-id1029096298?k=20&m=1029096298&s=170667a&w=0&h=Cox0Ks6_3t5Jdju5r8lh6doGX9KegutP3tN-hGrEYW4=");
-		}else if(item.getTipo() == "Pizza") {
-			item.setLink("");
-		}else if(item.getTipo() == "Prato") {
-			item.setLink("");
+		if(item.getTipo().equals("Bebida")) {
+			item.setLink("https://images.pexels.com/photos/3551717/pexels-photo-3551717.png?auto=compress&cs=tinysrgb&dpr=1&w=500");
+		}else if(item.getTipo().equals("Sanduiche")) {
+			item.setLink("https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+		}else if(item.getTipo().equals("Pizza")) {
+			item.setLink("https://images.pexels.com/photos/2741457/pexels-photo-2741457.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+		}else if(item.getTipo().equals("Prato")) {
+			item.setLink("https://media.istockphoto.com/photos/japanese-cuisine-chicken-karaage-bento-picture-id177361574?b=1&k=20&m=177361574&s=170667a&w=0&h=G35T_yp3wbx7e_lkicXXsqN0xJUkhrj7XMR8GW00fIM=");
 		}
 		
 		ir.save(item);
