@@ -1,6 +1,7 @@
 package ifrn.pi.snacks.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,16 +17,18 @@ public class Pedido {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	
 	private Long id;
-	
-	
-	private String nome;
 
+	private Usuario cliente;
+
+    private ArrayList<Item> itens;
+    
 	private Double valortotal;
-
+	
 	private LocalDate data;
-
+	
 	private String endereco;
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -34,12 +37,12 @@ public class Pedido {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Usuario getCliente() {
+		return cliente;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setCliente(Usuario cliente) {
+		this.cliente = cliente;
 	}
 
 	public Double getValortotal() {

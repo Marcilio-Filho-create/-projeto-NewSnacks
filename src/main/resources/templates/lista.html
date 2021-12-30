@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Pedidos</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="CSS/cadastro.css">
+
+
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+body {
+	background-image: url("fotos/fundo.jpg");
+	background-color: #ffffff;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: rgb(0, 0, 0);
+	font-family: "Lobster", cursive;
+}
+
+nav#logo {
+	font-family: 'Lobster', cursive;
+}
+
+a#nomeL {
+	margin-left: 35px;
+}
+
+li#login {
+	margin-right: 35px;
+	font-size: 100pt;
+}
+</style>
+
+</head>
+
+
+<title>New Snacks</title>
+</head>
+<body>
+
+	<nav name="Logo" id="logo">
+		<div class="nav-wrapper blue lighten-2">
+			<a href="#" class="brand-logo" id="nomeL">New Stacks</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li id="login"><a href="/snacks/logar">Login</a></a></li>
+			</ul>
+		</div>
+	</nav>
+
+
+	<h1>Lista de Pedidos</h1>
+	<div class="row">
+		<div class="col s12">
+			<div class="card">
+				<div class="card-content">
+					<span class="card-title">Lista de Pedidos:</span>
+					<p th:if="${mensagem}" th:text="${mensagem}"></p>
+					<table class="highlight">
+
+
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Nome</th>
+								<th>Data</th>
+								<th>Valor</th>
+								<th>Endereço</th>
+							</tr>
+						</thead>
+
+
+						<tbody>
+
+
+
+
+							<tr th:each="e:${pedidos} ">
+
+								<td th:text="${e.id}">1</td>
+								<td th:text="${e.nome}">Sanduiche</td>
+								<td th:text="${#temporals.format(e.data, 'dd/MM/yyyy')}">25/02/2021</td>
+								<td>R$ <span th:text="${e.valor}">20,00</span></td>
+								<td th:text="${e.valor}">Centro 15</td>
+							</tr>
+
+						</tbody>
+					</table>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
