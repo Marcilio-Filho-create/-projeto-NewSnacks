@@ -65,7 +65,7 @@ public class SnacksController {
 		ModelAndView md = new ModelAndView();
 		
 		md.setViewName("cardapio");
-		List<Item> itens = ir.findAll();
+		List<Item> itens = ir.findByStatus(true);
 		md.addObject("itens", itens);
 		return md;
 	}
