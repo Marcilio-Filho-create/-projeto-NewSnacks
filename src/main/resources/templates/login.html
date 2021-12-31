@@ -1,62 +1,100 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://thymeleaf.org">
 
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<link rel="stylesheet" href="CSS/login.css">
-
-</head>
-
-<body>
-	<nav name="Logo" id="logo">
-		<div class="nav-wrapper blue lighten-2">
-			<a href="#" class="brand-logo" id="nomeL">New Stacks</a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li id="menu"><a href="/snacks/cadastrar">Cadastro</a></li>
-			</ul>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+			body{
+				background-color:#ffffff;
+				background-size: cover;
+				background-repeat: no-repeat;
+				color:rgb(0, 0, 0);
+				font-family: Arial, sans-serif;
+			}
+			
+			nav#logo{
+				font-family:'Lobster', cursive;
+			}
+			a#nomeL{
+				margin-left: 35px;
+			}
+			li#menu{
+				margin-right: 35px;
+				font-size: 100pt;
+			}
+			div#titulo{
+				text-align: center;
+				font-family: 'Lobster', cursive;
+			}
+			div#login{
+				width: 500px;
+				height: 350px;
+				background-color: rgb(173, 233, 235);
+				font-family:'Lobster', cursive;
+				margin-top: 50px;
+				border-radius: 30px;
+				text-align: center;
+				position: relative;
+			}
+			form#interno{
+				padding: 0px 50px 0px 50px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				
+			}
+			
+			label.inputName{
+				color: black;
+			}
+		</style>
+		<!-- <link rel="stylesheet"  href="_CSS/login.css"> -->
+	
+	</head>
+	
+	<body>
+		<div th:replace="~{menu :: menu}"></div>
+		
+		<div id="titulo">
+			<h3>Login</h3>
 		</div>
-	</nav>
-	<div id="titulo">
-		<h3>Login</h3>
-	</div>
-
-	<div class="container" id="login">
-		<div class="row">
-			<form class="col s12" action="" id="interno">
-				<div class="row">
-					<div class="input-field col s12">
-						<label class="inputName" for="email">E-mail</label><br> <input
-							id="email" type="email" class="validate">
+	
+		<div class="container" id="login">
+			<div class="row">
+				<form class="col s12" action="" id="interno" method="post">
+					<div class="row">
+						<div class="input-field col s12">
+							<label class="inputName" for="email">E-mail</label><br>
+							<input id="email" type="text" name="username" class="validate">
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<label class="inputName" for="senha">Senha</label> <br> <input
-							id="senha" type="password" class="validate">
+					<div class="row">
+						<div class="input-field col s12">
+							<label class="inputName" for="senha">Senha</label> <br>
+							<input id="senha" type="password" name="password" class="validate">
+						</div>
 					</div>
-				</div>
-				<button class="btn waves-effect waves-light" type="submit"
-					id="botao">
-					Login <i class="material-icons right"></i>
-				</button>
-			</form>
+					
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+					
+					<div class="row">
+						<div class="col-4">
+							<button class="btn waves-effect waves-light" type="submit">Login</button> 
+							<button class="btn waves-effect waves-light" type="reset">Limpar</button>
+							<!--<i class="material-icons right"></i>  id="botao"-->
+						</div>
+					</div>				
+					
+				</form>
+			</div>
 		</div>
-	</div>
-
-
-
-
-
-
-
-
-	</div>
-
-</body>
+	
+	</body>
 
 </html>
