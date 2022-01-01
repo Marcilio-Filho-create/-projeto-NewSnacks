@@ -1,12 +1,16 @@
 package ifrn.pi.snacks.models;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -22,6 +26,16 @@ public class Usuario implements UserDetails {
 	private String email;
 	private String senha;
 	
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Papel> papeis;
+	
+	public List<Papel> getPapeis() {
+		return papeis;
+	}
+	public void setPapeis(List<Papel> papeis) {
+		this.papeis = papeis;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -55,7 +69,7 @@ public class Usuario implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		return papeis;
 	}
 	@Override
 	public String getPassword() {
@@ -70,17 +84,17 @@ public class Usuario implements UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public boolean isEnabled() {
