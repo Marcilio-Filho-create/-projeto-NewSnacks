@@ -38,11 +38,21 @@ public class SnacksController {
 	}
 	
 	
+	@PostMapping()
+	public String confirmarPedido(Pedido pedido) {
+		pr.save(pedido);
+		
+		return"redirect:/snacks/cardapio";
+		
+	}
+	
+	
+	
 	@GetMapping()
-	public ModelAndView listadepedidos() {
+	public ModelAndView listarPedidos() {
 		
 		List<Pedido> lista = pr.findAll();
-		ModelAndView mv = new ModelAndView("/lista");
+		ModelAndView mv = new ModelAndView("lista");
 		mv.addObject("pedidos", lista);
 		return mv;
 		

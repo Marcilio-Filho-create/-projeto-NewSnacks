@@ -1,41 +1,109 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-	<head>
-	    <meta charset="UTF-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <title>Cardápio</title>
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	    
-	    <style type="text/css">
-	    div#cardapio{
-	   		padding: 5px 5px 5px 5px;
-	   		background-color: rgb(43, 36, 141);
-			box-shadow: 5px 5px 3px;
-	    }
-	    </style>
-	</head>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardápio</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 
-	<body>
-		<div th:replace="~{menu :: menu}"></div>
-			<div class="container" id=cardapio>
-				<div class="row" style="margin-top:30px; size: 100px;">
-					<div class="col s3" th:each="i : ${itens}">
-						<div class="card">
-							<div class="card-image">
-								<img th:src="${i.link}">
-								<span class="card-title" th:text="${i.nome}">Hamburger</span>
-								<a href="" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-							</div>
-							<div class="card-content">
-			                    <p th:text="${i.descricao}">Hamburgão feito na hora</p>
-			                    <p>Preço: R$ <span th:text="${i.preco}">10</span></p>
-				            </div>
-			            </div>
-			        </div>
-			    </div>
+<style type="text/css">
+div#cardapio {
+	padding: 5px 5px 5px 5px;
+	background-color: rgb(43, 36, 141);
+	box-shadow: 5px 5px 3px;
+}
+</style>
+</head>
+
+<body>
+	<div th:replace="~{menu :: menu}"></div>
+	<div class="container" id=cardapio>
+		<div class="row" style="margin-top: 30px; size: 100px;">
+			<div class="col s3" th:each="i : ${itens}">
+				<div class="card">
+					<div class="card-image">
+						<img th:src="${i.link}"> <span class="card-title"
+							th:text="${i.nome}">Hamburger</span> <a href=""
+							class="btn-floating halfway-fab waves-effect waves-light red"><i
+							class="material-icons">add</i></a>
+					</div>
+					<div class="card-content">
+						<p th:text="${i.descricao}">Hamburgão feito na hora</p>
+						<p>
+							Preço: R$ <span th:text="${i.preco}">10</span>
+						</p>
+					</div>
+				</div>
 			</div>
-	</body>
+		</div>
+	</div>
+
+	<div class="container">
+	<div class="row">
+		<div class="col s12">
+			<div class="card">
+				<div class="card-content">
+					<span class="card-title">Pedido</span>
+					<p th:if="${mensagem}" th:text="${mensagem}"></p>
+					<table class="highlight">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Preço</th>
+								<th>Tipo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p : ${Pitens}">
+								<td th:text="${p.nome}">feijao</td>
+								<td>R$ <span th:text="${p.preco}">00</span></td>
+								<td th:text="${p.tipo}"></td>
+								<td><a th:href="@{}"><i class="material-icons">delete_forever</i></a></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<br>
+					<br>
+					<br>
+					<br>
+
+					<form action="" method="post">
+
+
+						<div>
+							<label>Nome: </label> <input type="text" name="cliente">
+						</div>
+
+						<div>
+							<label>Endereço: </label> <input type="text"
+								name="endereco">
+						</div>
+
+						<div>
+							<label>Valor total: </label> <input type="number" name="valortotal"
+								th:value="${valortotal}" readonly="readonly">
+						</div>
+
+						<div>
+							<button type="submit" class="btn">Confirmar Compra</button>
+							<button type="reset" class="btn">Cancelar</button>
+						</div>
+						
+						
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+</body>
 
 </html>
