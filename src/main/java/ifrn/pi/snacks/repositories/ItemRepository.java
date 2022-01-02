@@ -9,5 +9,5 @@ import ifrn.pi.snacks.models.Item;
 public interface ItemRepository extends JpaRepository<Item, Long>{
 	
 	List<Item> findByStatus(boolean status);
-	
+	List<Item> findBySelecionado(boolean selecionado);
 }

@@ -18,6 +18,15 @@ public class Item {
 	private String tipo;
 	private boolean status = false;
 	private String link; 
+	private boolean selecionado = false;
+
+	public boolean isSelecionado() {
+		return selecionado;
+	}
+
+	public void setSelecionado(boolean selecionado) {
+		this.selecionado = selecionado;
+	}
 
 	public Long getId() {
 		return id;

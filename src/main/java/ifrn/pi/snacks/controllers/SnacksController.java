@@ -58,7 +58,31 @@ public class SnacksController {
 		
 	}
 	
+	@GetMapping("/cardapio/{id}/addItem")
+	public ModelAndView adicionarItem(@PathVariable Long id) {
+		Optional<Item> opt = ir.findById(id);
+		
+		if(!opt.isEmpty()) {
+			Item item = opt.get();
+			item.setSelecionado(true);
+			ir.save(item);
+		}
+		
+		return cardapio();
+	}
 	
+	@GetMapping("/cardapio/{id}/removerItem")
+	public ModelAndView removerItem(@PathVariable Long id) {
+		Optional<Item> opt = ir.findById(id);
+		
+		if(!opt.isEmpty()) {
+			Item item = opt.get();
+			item.setSelecionado(false);
+			ir.save(item);
+		}
+		
+		return cardapio();
+	}
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(){
@@ -76,7 +100,9 @@ public class SnacksController {
 		
 		md.setViewName("cardapio");
 		List<Item> itens = ir.findByStatus(true);
+		List<Item> itensPedido = ir.findBySelecionado(true);
 		md.addObject("itens", itens);
+		md.addObject("itensP", itensPedido);
 		return md;
 	}
 	
@@ -95,7 +121,6 @@ public class SnacksController {
 		
 		ir.save(item);
 		attributes.addFlashAttribute("mensagem", "Item adicionado a lista com sucesso!");
-		System.out.println(item);
 		return "redirect:/snacks/addItem";
 	}
 	
