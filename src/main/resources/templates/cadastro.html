@@ -1,11 +1,57 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<head>
 	    <meta charset="UTF-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <title>Cadastro</title>
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	    <style type="text/css">
+	    @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+			body{
+				background-color:#ffffff;
+				background-size: cover;
+				background-repeat: no-repeat;
+				color:rgb(0, 0, 0);
+				font-family: Arial, sans-serif;
+			}
+			
+			nav#logo{
+				font-family:'Lobster', cursive;
+			}
+			a#nomeL{
+				margin-left: 35px;
+			}
+			li#login{
+				margin-right: 35px;
+				font-size: 100pt;
+			}
+			div#titulo{
+				text-align: center;
+				font-family: 'Lobster', cursive;
+			}
+			div#cadastro{
+				width: 500px;
+				height: 440px;
+				background-color: rgb(173, 233, 235);
+				font-family:'Lobster', cursive;
+				margin-top: 50px;
+				border-radius: 30px;
+				text-align: center;
+				position: relative;
+				
+			}
+			form#interno{
+				padding: 0px 50px 0px 50px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			label.inputName{
+				color: black;
+			}
+	    </style>
 	</head>
 	
 	<body>
@@ -17,28 +63,50 @@
 	
 	    <div class="container" id="cadastro">
 	        <div class="row">
-	            <form class="col s12" id="interno" action="">
+	            <form class="col s12" id="interno" action="/snacks/cadastrar/concluir" method="post">
+	            
 	                <div class="row">
 	                    <div class="input-field col s12">
-	                        <label class="inputName" for="nome">Nome</label><br>
-	                        <input id="nome" type="text" class="validate">
+	                        <label class="inputName">Nome</label><br>
+	                        <input name="nome" type="text" class="validate">
 	                    </div>
 	                </div>
 	                <div class="row">
 	                    <div class="input-field col s12">
-	                        <label class="inputName" for="email">E-mail</label><br>
-	                        <input id="email" type="email" class="validate">
+	                        <label class="inputName">E-mail</label><br>
+	                        <input name="email" type="text" class="validate">
 	
 	                    </div>
 	                </div>
 	                <div class="row">
 	                    <div class="input-field col s12">
-	                        <label class="inputName" for="senha">Senha</label> <br>
-	                        <input id="senha" type="password" class="validate">
+	                        <label class="inputName">Senha</label> <br>
+	                        <input name="senha" type="password" class="validate">
 	                    </div>
 	                </div>
+	                <div sec:authorize="hasRole('GERENTE')" class="row">
+		                <label>Tipo: </label>
+							<p>
+								<label>
+									<input class="with-gap" name="tipo" type="radio" value="C" checked/>
+									<span>Cliente</span>
+								</label>
+							</p>
+							<p>
+								<label>
+									<input class="with-gap" name="tipo" type="radio" value="F"/>
+									<span>Funcionário</span>
+								</label>
+							</p>
+							<p>
+								<label>
+									<input class="with-gap" name="tipo" type="radio" value="G"/>
+									<span>Gerente</span>
+								</label>
+							</p>
+						</div>
 	                <button class="btn waves-effect waves-light" type="submit" id="botao">Cadastrar-se
-	                    <i class="material-icons right"></i>
+	                    <!-- <i class="material-icons right"></i> -->
 	                </button>
 	            </form>
 	        </div>

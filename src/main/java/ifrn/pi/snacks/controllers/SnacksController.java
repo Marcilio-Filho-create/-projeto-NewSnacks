@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ifrn.pi.snacks.models.Item;
 import ifrn.pi.snacks.models.Pedido;
+import ifrn.pi.snacks.models.Usuario;
 import ifrn.pi.snacks.repositories.ItemRepository;
 import ifrn.pi.snacks.repositories.PedidoRepository;
+import ifrn.pi.snacks.repositories.UsuarioRepository;
 
 
 @Controller
@@ -25,6 +28,7 @@ public class SnacksController {
 	@Autowired
 	private ItemRepository ir;
 	private PedidoRepository pr;
+	private UsuarioRepository ur;
 	
 	@GetMapping("/addItem")
 	public ModelAndView form(Item item) {
@@ -34,75 +38,6 @@ public class SnacksController {
 		List<Item> itens = ir.findAll();
 		md.addObject("itens", itens);
 		
-		return md;
-	}
-	
-	
-	@PostMapping()
-	public String confirmarPedido(Pedido pedido) {
-		pr.save(pedido);
-		
-		return"redirect:/snacks/cardapio";
-		
-	}
-	
-	
-	
-	@GetMapping()
-	public ModelAndView listarPedidos() {
-		
-		List<Pedido> lista = pr.findAll();
-		ModelAndView mv = new ModelAndView("lista");
-		mv.addObject("pedidos", lista);
-		return mv;
-		
-	}
-	
-	@GetMapping("/cardapio/{id}/addItem")
-	public ModelAndView adicionarItem(@PathVariable Long id) {
-		Optional<Item> opt = ir.findById(id);
-		
-		if(!opt.isEmpty()) {
-			Item item = opt.get();
-			item.setSelecionado(true);
-			ir.save(item);
-		}
-		
-		return cardapio();
-	}
-	
-	@GetMapping("/cardapio/{id}/removerItem")
-	public ModelAndView removerItem(@PathVariable Long id) {
-		Optional<Item> opt = ir.findById(id);
-		
-		if(!opt.isEmpty()) {
-			Item item = opt.get();
-			item.setSelecionado(false);
-			ir.save(item);
-		}
-		
-		return cardapio();
-	}
-	
-	@GetMapping("/cadastrar")
-	public String cadastrar(){
-		return "cadastro";
-	}
-	
-	@GetMapping("/logar")
-	public String logar(){
-		return "login";
-	}
-	
-	@GetMapping("/cardapio")
-	public ModelAndView cardapio(){
-		ModelAndView md = new ModelAndView();
-		
-		md.setViewName("cardapio");
-		List<Item> itens = ir.findByStatus(true);
-		List<Item> itensPedido = ir.findBySelecionado(true);
-		md.addObject("itens", itens);
-		md.addObject("itensP", itensPedido);
 		return md;
 	}
 	
@@ -175,4 +110,78 @@ public class SnacksController {
 		System.out.println(opt.get());
 		return md;
 	}
+	
+	@PostMapping()
+	public String confirmarPedido(Pedido pedido) {
+		pr.save(pedido);
+		
+		return"redirect:/snacks/cardapio";
+		
+	}
+	
+	@GetMapping()
+	public ModelAndView listarPedidos() {
+		
+		List<Pedido> lista = pr.findAll();
+		ModelAndView mv = new ModelAndView("lista");
+		mv.addObject("pedidos", lista);
+		return mv;
+		
+	}
+	
+	@GetMapping("/cardapio")
+	public ModelAndView cardapio(){
+		ModelAndView md = new ModelAndView();
+		
+		md.setViewName("cardapio");
+		List<Item> itens = ir.findByStatus(true);
+		List<Item> itensPedido = ir.findBySelecionado(true);
+		md.addObject("itens", itens);
+		md.addObject("itensP", itensPedido);
+		return md;
+	}
+	
+	@GetMapping("/cardapio/{id}/addItem")
+	public ModelAndView adicionarItem(@PathVariable Long id) {
+		Optional<Item> opt = ir.findById(id);
+		
+		if(!opt.isEmpty()) {
+			Item item = opt.get();
+			item.setSelecionado(true);
+			ir.save(item);
+		}
+		
+		return cardapio();
+	}
+	
+	@GetMapping("/cardapio/{id}/removerItem")
+	public ModelAndView removerItem(@PathVariable Long id) {
+		Optional<Item> opt = ir.findById(id);
+		
+		if(!opt.isEmpty()) {
+			Item item = opt.get();
+			item.setSelecionado(false);
+			ir.save(item);
+		}
+		
+		return cardapio();
+	}
+	
+	@GetMapping("/cadastrar")
+	public String cadastrar(){
+		return "cadastro";
+	}
+	
+	@PostMapping("/cadastrar/concluir")
+	public String salvarUsuario(Usuario usuario) {
+		System.out.println(usuario);
+		ur.save(usuario);
+		return "redirect:/snacks/logar";
+	}
+	
+	@GetMapping("/logar")
+	public String logar(){
+		return "login";
+	}
+	
 }

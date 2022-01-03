@@ -14,7 +14,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/").permitAll()
 			.antMatchers("/snacks/cardapio/**").hasRole("CARDAPIO")
 			.antMatchers("/snacks/addItem/**").hasRole("ADDITEM")
-			.antMatchers("/snacks/cadastrar").permitAll()
+			.antMatchers("/snacks/cadastrar/**").permitAll()
 			.anyRequest().authenticated()
 		.and()
 		.formLogin()

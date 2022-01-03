@@ -66,6 +66,14 @@ public class Usuario implements UserDetails {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", tipo=" + tipo + ", email=" + email + ", senha=" + senha
+				+ ", papeis=" + papeis + "]";
+	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
