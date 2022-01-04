@@ -14,7 +14,14 @@ public class Papel implements GrantedAuthority {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private char tipo;
 	
+	public char getTipo() {
+		return tipo;
+	}
+	public void setTipo(char tipo) {
+		this.tipo = tipo;
+	}
 	public Long getId() {
 		return id;
 	}

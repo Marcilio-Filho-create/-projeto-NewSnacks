@@ -1,6 +1,7 @@
 package ifrn.pi.snacks.models;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,25 @@ public class Pedido {
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Item> itens;
-    
+
+	private Double valortotal;
+	
+	private LocalDate data;
+	private LocalTime horario;
+	private String endereco;
+	
+	public LocalTime getHorario() {
+		return horario;
+	}
+
+	public void setHorario(LocalTime horario) {
+		this.horario = horario;
+	}
+	
+	public void pegarHorario() {
+		this.horario = LocalTime.now();
+	}
+
 	public List<Item> getItens() {
 		return itens;
 	}
@@ -38,13 +57,6 @@ public class Pedido {
 	public void setItens(List<Item> itens) {
 		this.itens = itens;
 	}
-
-	private Double valortotal;
-	
-	private LocalDate data;
-	
-	private String endereco;
-
 	
 	public Long getId() {
 		return id;
@@ -69,6 +81,13 @@ public class Pedido {
 	public void setValortotal(Double valortotal) {
 		this.valortotal = valortotal;
 	}
+	
+	public void calcularValor(List<Item> itens) {
+		
+		for(Item item : itens) {
+			this.valortotal = valortotal + item.getPreco();
+		}
+	}
 
 	public LocalDate getData() {
 		return data;
@@ -76,6 +95,10 @@ public class Pedido {
 
 	public void setData(LocalDate data) {
 		this.data = data;
+	}
+	
+	public void pegarData() {
+		this.data = LocalDate.now();
 	}
 
 	public String getEndereco() {

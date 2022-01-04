@@ -84,6 +84,28 @@
 	                        <input name="senha" type="password" class="validate">
 	                    </div>
 	                </div>
+	                <div sec:authorize="hasRole('CADASTROESPECIAL')">
+	                    <div class="input-field col s12">
+	                    	<p>
+	                    		<label>
+	                        		<input name="tipo" type="radio" value="cliente" class="validate" checked/>
+	                        		<span>Cliente</span>
+	                        	</label>
+	                    	</p>
+	                    	<p>
+	                    		<label>
+	                        		<input name="tipo" type="radio" value="funcionario" class="validate"/>
+	                        		<span>Funcionário</span>
+	                        	</label>
+	                    	</p>
+	                    	<p>
+	                    		<label>
+	                        		<input name="tipo" type="radio" value="gerente" class="validate"/>
+	                        		<span>Gerente</span>
+	                        	</label>
+	                    	</p>
+	                    </div>
+	                </div>
 					<div>
 						<button type="submit" class="btn" id="botao">Cadastrar-se</button>
 						<button type="reset" class="btn" id="botao">Limpar</button>

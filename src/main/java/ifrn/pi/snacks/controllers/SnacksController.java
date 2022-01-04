@@ -17,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ifrn.pi.snacks.models.Item;
+import ifrn.pi.snacks.models.Papel;
 import ifrn.pi.snacks.models.Pedido;
 import ifrn.pi.snacks.models.Usuario;
 import ifrn.pi.snacks.repositories.ItemRepository;
+import ifrn.pi.snacks.repositories.PapelRepository;
 import ifrn.pi.snacks.repositories.PedidoRepository;
 import ifrn.pi.snacks.repositories.UsuarioRepository;
 
@@ -34,6 +36,8 @@ public class SnacksController {
 	private PedidoRepository pr;
 	@Autowired
 	private UsuarioRepository ur;
+	@Autowired
+	private PapelRepository par;
 	
 	@GetMapping("/addItem")
 	public ModelAndView form(Item item) {
@@ -177,8 +181,14 @@ public class SnacksController {
 		if(!itens.isEmpty() && usuario != null) {
 			pedido.setCliente(usuario);
 			pedido.setItens(itens);
-			System.out.println(pedido);
+			pedido.calcularValor(itens);
+			pedido.pegarData();
+			pedido.pegarHorario();
 			pr.save(pedido);
+		}
+		for(Item item: itens) {
+			item.setSelecionado(false);
+			ir.save(item);
 		}
 		
 		return cardapio();
@@ -190,8 +200,20 @@ public class SnacksController {
 	}
 	
 	@PostMapping("/cadastrar/salvar")
-	public String salvarUsuario(Usuario usuario) {
+	public String salvarUsuario(Usuario usuario, String tipo) {
 		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+		List<Papel> papeis = null;
+		System.out.println(tipo);
+		if(tipo.equals("gerente")) {
+			papeis = par.findAll();
+		}else if(tipo.equals("funcionario")) {
+			papeis = par.findAllByTipo('f');
+			papeis.addAll(par.findAllByTipo('c'));
+		}else if(tipo.equals("cliente")) {
+			papeis = par.findAllByTipo('c');
+		}
+		System.out.println(papeis);
+		usuario.setPapeis(papeis);
 		ur.save(usuario);
 		return "redirect:/logar";
 	}
