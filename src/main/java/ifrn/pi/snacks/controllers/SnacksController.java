@@ -3,9 +3,12 @@ package ifrn.pi.snacks.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +30,9 @@ public class SnacksController {
 	
 	@Autowired
 	private ItemRepository ir;
+	@Autowired
 	private PedidoRepository pr;
+	@Autowired
 	private UsuarioRepository ur;
 	
 	@GetMapping("/addItem")
@@ -41,8 +46,13 @@ public class SnacksController {
 		return md;
 	}
 	
-	@PostMapping("/salvarItem")
-	public String salvarItem(Item item, RedirectAttributes attributes) {
+	@PostMapping("/addItem/salvarItem")
+	public ModelAndView salvarItem(@Valid Item item, BindingResult result, RedirectAttributes attributes) {
+		ModelAndView md = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			return form(item);
+		}
 		
 		if(item.getTipo().equals("Bebida")) {
 			item.setLink("https://images.pexels.com/photos/3551717/pexels-photo-3551717.png?auto=compress&cs=tinysrgb&dpr=1&w=500");
@@ -54,9 +64,10 @@ public class SnacksController {
 			item.setLink("https://media.istockphoto.com/photos/japanese-cuisine-chicken-karaage-bento-picture-id177361574?b=1&k=20&m=177361574&s=170667a&w=0&h=G35T_yp3wbx7e_lkicXXsqN0xJUkhrj7XMR8GW00fIM=");
 		}
 		
+		md.setViewName("redirect:/snacks/addItem");
 		ir.save(item);
 		attributes.addFlashAttribute("mensagem", "Item adicionado a lista com sucesso!");
-		return "redirect:/snacks/addItem";
+		return md;
 	}
 	
 	@GetMapping("/addItem/{id}/deletar")
@@ -111,15 +122,7 @@ public class SnacksController {
 		return md;
 	}
 	
-	@PostMapping()
-	public String confirmarPedido(Pedido pedido) {
-		pr.save(pedido);
-		
-		return"redirect:/snacks/cardapio";
-		
-	}
-	
-	@GetMapping()
+	@GetMapping("/pedidos")
 	public ModelAndView listarPedidos() {
 		
 		List<Pedido> lista = pr.findAll();
@@ -167,16 +170,30 @@ public class SnacksController {
 		return cardapio();
 	}
 	
+	@PostMapping("/cardapio/finalizarPedido")
+	public ModelAndView finalizarPedido(Pedido pedido, String email) {
+		List<Item> itens = ir.findBySelecionado(true);
+		Usuario usuario = ur.findByEmail(email);
+		if(!itens.isEmpty() && usuario != null) {
+			pedido.setCliente(usuario);
+			pedido.setItens(itens);
+			System.out.println(pedido);
+			pr.save(pedido);
+		}
+		
+		return cardapio();
+	}
+	
 	@GetMapping("/cadastrar")
 	public String cadastrar(){
 		return "cadastro";
 	}
 	
-	@PostMapping("/cadastrar/concluir")
+	@PostMapping("/cadastrar/salvar")
 	public String salvarUsuario(Usuario usuario) {
-		System.out.println(usuario);
+		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 		ur.save(usuario);
-		return "redirect:/snacks/logar";
+		return "redirect:/logar";
 	}
 	
 	@GetMapping("/logar")

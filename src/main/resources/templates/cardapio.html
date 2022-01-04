@@ -71,28 +71,23 @@ div#cardapio {
 					<br>
 					<br>
 
-					<form action="" method="post">
-
+					<form action="/snacks/cardapio/finalizarPedido" method="post">
 
 						<div>
-							<label>Nome: </label> <input type="text" name="cliente">
+							<label>Email: </label> <input type="text" name="email">
 						</div>
-
 						<div>
 							<label>Endereço: </label> <input type="text"
 								name="endereco">
 						</div>
-
 						<div>
-							<label>Valor total: </label> <input type="number" name="valortotal"
-								th:value="${valortotal}" readonly="readonly">
+							<label>Valor total: </label> <input type="number" value="50" name="valortotal" readonly="readonly">  <!-- th:value="${valortotal}" -->
 						</div>
 
 						<div>
 							<button type="submit" class="btn">Confirmar Compra</button>
 							<button type="reset" class="btn">Cancelar</button>
 						</div>
-						
 						
 					</form>
 

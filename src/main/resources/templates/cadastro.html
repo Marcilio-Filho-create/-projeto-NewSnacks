@@ -63,7 +63,7 @@
 	
 	    <div class="container" id="cadastro">
 	        <div class="row">
-	            <form class="col s12" id="interno" action="/snacks/cadastrar/concluir" method="post">
+	            <form class="col s12" id="interno" action="/snacks/cadastrar/salvar" method="post">
 	            
 	                <div class="row">
 	                    <div class="input-field col s12">
@@ -84,30 +84,10 @@
 	                        <input name="senha" type="password" class="validate">
 	                    </div>
 	                </div>
-	                <div sec:authorize="hasRole('GERENTE')" class="row">
-		                <label>Tipo: </label>
-							<p>
-								<label>
-									<input class="with-gap" name="tipo" type="radio" value="C" checked/>
-									<span>Cliente</span>
-								</label>
-							</p>
-							<p>
-								<label>
-									<input class="with-gap" name="tipo" type="radio" value="F"/>
-									<span>Funcionário</span>
-								</label>
-							</p>
-							<p>
-								<label>
-									<input class="with-gap" name="tipo" type="radio" value="G"/>
-									<span>Gerente</span>
-								</label>
-							</p>
-						</div>
-	                <button class="btn waves-effect waves-light" type="submit" id="botao">Cadastrar-se
-	                    <!-- <i class="material-icons right"></i> -->
-	                </button>
+					<div>
+						<button type="submit" class="btn" id="botao">Cadastrar-se</button>
+						<button type="reset" class="btn" id="botao">Limpar</button>
+					</div>
 	            </form>
 	        </div>
 	    </div>

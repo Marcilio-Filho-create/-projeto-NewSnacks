@@ -22,7 +22,6 @@ public class Usuario implements UserDetails {
 	private Long id;
 	
 	private String nome;
-	private char tipo;
 	private String email;
 	private String senha;
 	
@@ -48,12 +47,6 @@ public class Usuario implements UserDetails {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public char getTipo() {
-		return tipo;
-	}
-	public void setTipo(char tipo) {
-		this.tipo = tipo;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -71,7 +64,7 @@ public class Usuario implements UserDetails {
 	
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", tipo=" + tipo + ", email=" + email + ", senha=" + senha
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha
 				+ ", papeis=" + papeis + "]";
 	}
 	@Override

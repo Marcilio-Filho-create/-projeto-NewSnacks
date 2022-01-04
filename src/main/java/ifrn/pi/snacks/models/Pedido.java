@@ -2,12 +2,17 @@ package ifrn.pi.snacks.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 
@@ -22,8 +27,18 @@ public class Pedido {
 	@ManyToOne
 	private Usuario cliente;
 	
-	private ArrayList<Item> itens;
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Item> itens;
     
+	public List<Item> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<Item> itens) {
+		this.itens = itens;
+	}
+
 	private Double valortotal;
 	
 	private LocalDate data;
@@ -70,8 +85,11 @@ public class Pedido {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", cliente=" + cliente + ", itens=" + itens + ", valortotal=" + valortotal
+				+ ", data=" + data + ", endereco=" + endereco + "]";
+	}
 	
 }
