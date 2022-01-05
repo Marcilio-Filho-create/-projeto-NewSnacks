@@ -68,18 +68,21 @@
 	                <div class="row">
 	                    <div class="input-field col s12">
 	                        <label class="inputName">Nome</label><br>
+	                        <p class="red-text text-darken-2" th:erros="*{nome}"></p> 
 	                        <input name="nome" type="text" class="validate">
 	                    </div>
 	                </div>
 	                <div class="row">
 	                    <div class="input-field col s12">
 	                        <label class="inputName">E-mail</label><br>
+	                        <p class="red-text text-darken-2" th:erros="*{email}"></p> 
 	                        <input name="email" type="text" class="validate">
 	                    </div>
 	                </div>
 	                <div class="row">
 	                    <div class="input-field col s12">
 	                        <label class="inputName">Senha</label> <br>
+	                        <p class="red-text text-darken-2" th:erros="*{senha}"></p> 
 	                        <input name="senha" type="password" class="validate">
 	                    </div>
 	                </div>

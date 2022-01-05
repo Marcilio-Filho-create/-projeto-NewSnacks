@@ -200,7 +200,10 @@ public class SnacksController {
 	}
 	
 	@PostMapping("/cadastrar/salvar")
-	public String salvarUsuario(Usuario usuario) {
+	public String salvarUsuario(Usuario usuario, BindingResult result) {
+		if(result.hasErrors()) { 
+			return cadastrar(); 
+		}
 		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 		List<Papel> papeis = par.findAllByTipo('c');
 		System.out.println(papeis);
@@ -215,7 +218,10 @@ public class SnacksController {
 	}
 	
 	@PostMapping("/cadastroEspecial/salvar")
-	public String salvarUsuarioEspeciao(Usuario usuario, String tipo) {
+	public String salvarUsuarioEspeciao(Usuario usuario, String tipo, BindingResult result) {
+		if(result.hasErrors()) { 
+			return cadastrarDetalhado(); 
+		}
 		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 		List<Papel> papeis = null;
 		System.out.println(tipo);
