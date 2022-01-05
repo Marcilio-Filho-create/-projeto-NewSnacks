@@ -234,7 +234,7 @@ public class SnacksController {
 		usuario.setPapeis(papeis);
 		ur.save(usuario);
 		attributes.addFlashAttribute("mensagem", "Novo usuário cadastrado!");
-		return "redirect:/snacks/cardapio";
+		return "redirect:/snacks/cadastroEspecial/salvar";
 	}
 	
 	@GetMapping("/logar")
