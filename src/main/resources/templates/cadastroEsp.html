@@ -51,6 +51,9 @@
 			label.inputName{
 				color: black;
 			}
+			p#erro{
+					color: red;
+			}
 	    </style>
 	</head>
 	
@@ -62,6 +65,8 @@
 	    </div>
 	
 	    <div class="container" id="cadastro">
+	    	<p id="erro" th:if="${mensagemE}" th:text="${mensagemE}"></p>
+	        <p th:if="${mensagem}" th:text="${mensagem}"></p>
 	        <div class="row">
 	            <form class="col s12" id="interno" action="/snacks/cadastroEspecial/salvar" method="post">
 	            

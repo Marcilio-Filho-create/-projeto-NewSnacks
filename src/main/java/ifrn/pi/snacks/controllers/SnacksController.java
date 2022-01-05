@@ -110,8 +110,6 @@ public class SnacksController {
 	public ModelAndView selecionarItem(@PathVariable Long idI) {
 		ModelAndView md = new ModelAndView();
 		Optional<Item> opt = ir.findById(idI);
-
-		System.out.println(opt.get());
 		
 		if(opt.isEmpty()) {
 			md.setViewName("/snacks/addItem");
@@ -122,7 +120,7 @@ public class SnacksController {
 			List<Item> itens = ir.findAll();
 			md.addObject("itens", itens);
 		}
-		System.out.println(opt.get());
+		
 		return md;
 	}
 	
@@ -175,7 +173,7 @@ public class SnacksController {
 	}
 	
 	@PostMapping("/cardapio/finalizarPedido")
-	public ModelAndView finalizarPedido(Pedido pedido, String email) {
+	public ModelAndView finalizarPedido(@Valid Pedido pedido, String email) {
 		List<Item> itens = ir.findBySelecionado(true);
 		Usuario usuario = ur.findByEmail(email);
 		if(!itens.isEmpty() && usuario != null) {
@@ -200,10 +198,13 @@ public class SnacksController {
 	}
 	
 	@PostMapping("/cadastrar/salvar")
-	public String salvarUsuario(Usuario usuario) {
+	public String salvarUsuario(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes) {
+		if(result.hasErrors()) { 
+			attributes.addFlashAttribute("mensagem", "[ERRO] Preencha todos os espaços corretamente!");
+			return "redirect:/snacks/cadastrar"; 
+		}
 		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 		List<Papel> papeis = par.findAllByTipo('c');
-		System.out.println(papeis);
 		usuario.setPapeis(papeis);
 		ur.save(usuario);
 		return "redirect:/logar";
@@ -215,10 +216,13 @@ public class SnacksController {
 	}
 	
 	@PostMapping("/cadastroEspecial/salvar")
-	public String salvarUsuarioEspeciao(Usuario usuario, String tipo) {
+	public String salvarUsuarioEspeciao(@Valid Usuario usuario, String tipo, BindingResult result, RedirectAttributes attributes) {
+		if(result.hasErrors()) { 
+			attributes.addFlashAttribute("mensagemE", "[ERRO] Preencha todos os espaços corretamente!");
+			return "redirect:/snacks/cadastroEspecial"; 
+		}
 		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 		List<Papel> papeis = null;
-		System.out.println(tipo);
 		if(tipo.equals("gerente")) {
 			papeis = par.findAll();
 		}else if(tipo.equals("funcionario")) {
@@ -229,7 +233,8 @@ public class SnacksController {
 		}
 		usuario.setPapeis(papeis);
 		ur.save(usuario);
-		return "redirect:/cardapio";
+		attributes.addFlashAttribute("mensagem", "Novo usuário cadastrado!");
+		return "redirect:/snacks/cardapio";
 	}
 	
 	@GetMapping("/logar")

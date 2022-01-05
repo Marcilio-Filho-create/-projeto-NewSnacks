@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -22,7 +24,6 @@ public class Pedido {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
 	private Long id;
 	
 	@ManyToOne
@@ -31,9 +32,8 @@ public class Pedido {
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Item> itens;
-
+	@NotNull
 	private Double valortotal;
-	
 	private LocalDate data;
 	private LocalTime horario;
 	private String endereco;
