@@ -34,6 +34,7 @@
 					<li sec:authorize="hasRole('ADDITEM')" id="menu"><a href="/snacks/addItem">Editar Item</a></li>
 					<li sec:authorize="hasRole('PEDIDOS')" id="menu"><a href="/snacks/pedidos">Lista de Pedidos</a></li>
 					<li sec:authorize="!isAuthenticated" id="menu"><a href="/snacks/cadastrar">Cadastro</a></li>
+					<li sec:authorize="hasRole('CADASTROESPECIAL')" id="menu"><a href="/snacks/cadastroEspecial">Novo Usuário</a></li>
 					<li sec:authorize="!isAuthenticated" id="login"><a href="/snacks/logar">Login</a></li>
 				</ul>
 			</div>

@@ -58,7 +58,7 @@ li#login {
 								<th>Nome</th>
 								<th>Itens</th>
 								<th>Data</th>
-								<th>Data</th>
+								<th>Horário</th>
 								<th>Valor</th>
 								<th>Endereço</th>
 							</tr>
@@ -70,13 +70,9 @@ li#login {
 								<td th:text="${p.id}">1</td>
 								<td th:text="${p.cliente.nome}">Sanduiche</td>
 								<td>
-									<table class="highlight">
-										<tbody>
-											<tr th:each="i : ${p.itens}">
-												<td th:text="${i.nome}">nome</td>
-											</tr>
-										</tbody>
-									</table>
+									<ul th:each="i : ${p.itens}">
+										<li  th:text="${i.nome}"></li>
+									</ul>
 								</td>
 								<td th:text="${#temporals.format(p.data, 'dd/MM/yyyy')}">25/02/2021</td>
 								<td th:text="${p.horario}"></td>

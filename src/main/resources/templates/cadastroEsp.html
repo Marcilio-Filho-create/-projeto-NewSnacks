@@ -32,7 +32,7 @@
 			}
 			div#cadastro{
 				width: 500px;
-				height: 440px;
+				height: 600px;
 				background-color: rgb(173, 233, 235);
 				font-family:'Lobster', cursive;
 				margin-top: 50px;
@@ -63,7 +63,7 @@
 	
 	    <div class="container" id="cadastro">
 	        <div class="row">
-	            <form class="col s12" id="interno" action="/snacks/cadastrar/salvar" method="post">
+	            <form class="col s12" id="interno" action="/snacks/cadastroEspecial/salvar" method="post">
 	            
 	                <div class="row">
 	                    <div class="input-field col s12">
@@ -75,13 +75,35 @@
 	                    <div class="input-field col s12">
 	                        <label class="inputName">E-mail</label><br>
 	                        <input name="email" type="text" class="validate">
-	
 	                    </div>
 	                </div>
 	                <div class="row">
 	                    <div class="input-field col s12">
 	                        <label class="inputName">Senha</label> <br>
 	                        <input name="senha" type="password" class="validate">
+	                    </div>
+	                </div>
+	                <div>
+	                    <div class="input-field col s12">
+	                    <label>Tipo: </label>
+	                    	<p>
+	                    		<label>
+	                        		<input name="tipo" type="radio" value="cliente" class="validate" checked/>
+	                        		<span>Cliente</span>
+	                        	</label>
+	                    	</p>
+	                    	<p>
+	                    		<label>
+	                        		<input name="tipo" type="radio" value="funcionario" class="validate"/>
+	                        		<span>Funcionário</span>
+	                        	</label>
+	                    	</p>
+	                    	<p>
+	                    		<label>
+	                        		<input name="tipo" type="radio" value="gerente" class="validate"/>
+	                        		<span>Gerente</span>
+	                        	</label>
+	                    	</p>
 	                    </div>
 	                </div>
 					<div>
