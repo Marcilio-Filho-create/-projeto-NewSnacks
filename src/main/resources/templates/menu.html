@@ -1,43 +1,54 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-	<head>
-		<meta charset="UTF-8">
-		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-			body{
-				background-color:#ffffff;
-				background-size: cover;
-				background-repeat: no-repeat;
-				color:rgb(0, 0, 0);
-				font-family: Arial, sans-serif;
-			}
-			
-			nav#logo{
-				font-family:'Lobster', cursive;
-			}
-			a#nomeL{
-				margin-left: 35px;
-			}
-			li#menu{
-				margin-right: 35px;
-				font-size: 100pt;
-			}
-		</style>
-	</head>
-	<body>
-		<nav th:fragment="menu" name="Logo" id="logo">
-			<div class="nav-wrapper blue lighten-2">
-				<a href="/" class="brand-logo" id="nomeL">New Snacks</a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li id="menu"><a href="/">Home</a></li>
-					<li sec:authorize="hasRole('CARDAPIO')" id="menu"><a href="/snacks/cardapio">Cardápio</a></li>
-					<li sec:authorize="hasRole('ADDITEM')" id="menu"><a href="/snacks/addItem">Editar Item</a></li>
-					<li sec:authorize="hasRole('PEDIDOS')" id="menu"><a href="/snacks/pedidos">Lista de Pedidos</a></li>
-					<li sec:authorize="!isAuthenticated" id="menu"><a href="/snacks/cadastrar">Cadastro</a></li>
-					<li sec:authorize="hasRole('CADASTROESPECIAL')" id="menu"><a href="/snacks/cadastroEspecial">Novo Usuário</a></li>
-					<li sec:authorize="!isAuthenticated" id="login"><a href="/snacks/logar">Login</a></li>
-				</ul>
-			</div>
-		</nav>
-	</body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+body {
+	background-color: #ffffff;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: rgb(0, 0, 0);
+	font-family: Arial, sans-serif;
+}
+
+nav#logo {
+	font-family: 'Lobster', cursive;
+}
+
+a#nomeL {
+	margin-left: 35px;
+}
+
+li#menu {
+	margin-right: 35px;
+	font-size: 100pt;
+}
+</style>
+</head>
+<body>
+	<nav th:fragment="menu" name="Logo" id="logo">
+		<div class="nav-wrapper blue lighten-2">
+			<a href="/" class="brand-logo" id="nomeL">New Snacks</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li id="menu"><a href="/">Home</a></li>
+				<li sec:authorize="hasRole('CARDAPIO')" id="menu"><a
+					href="/snacks/cardapio">Cardápio</a></li>
+				<li sec:authorize="hasRole('ADDITEM')" id="menu"><a
+					href="/snacks/addItem">Editar Item</a></li>
+				<li sec:authorize="hasRole('PEDIDOS')" id="menu"><a
+					href="/snacks/pedidos">Lista de Pedidos</a></li>
+				<li sec:authorize="!isAuthenticated" id="menu"><a
+					href="/snacks/cadastrar">Cadastro</a></li>
+				<li sec:authorize="hasRole('CADASTROESPECIAL')" id="menu"><a
+					href="/snacks/cadastroEspecial">Novo Usuário</a></li>
+				<li sec:authorize="!isAuthenticated" id="login"><a
+					href="/snacks/logar">Login</a></li>
+			</ul>
+		</div>
+	</nav>
+</body>
 </html>
