@@ -11,31 +11,45 @@
 		rel="stylesheet">
 	
 	<style type="text/css">
-	@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-	body{
-		background-color:#ffffff;
-		background-size: cover;
-		background-repeat: no-repeat;
-		color:rgb(0, 0, 0);
-		font-family: Arial, sans-serif;
-	}
-			
-	nav#logo{
-		font-family:'Lobster', cursive;
-	}
-	a#nomeL{
-		margin-left: 35px;
-	}
-	li#menu{
-		margin-right: 35px;
-		font-size: 100pt;
-	}
-	div#cardapio {
-		padding: 5px 5px 5px 5px;
-		background-color: rgb(100, 181, 246);
-		box-shadow: 5px 5px 3px;
-	}
-	</style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+body {
+	background-image:
+		url("https://images.pexels.com/photos/1956974/pexels-photo-1956974.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+	background-color : #ffffff;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: rgb(0, 0, 0);
+	font-family: Arial, sans-serif;
+	background-color: #ffffff;
+}
+
+nav#logo {
+	font-family: 'Lobster', cursive;
+}
+
+a#nomeL {
+	margin-left: 35px;
+}
+
+li#menu {
+	margin-right: 35px;
+	font-size: 100pt;
+}
+
+div#cardapio {
+	padding: 5px 5px 5px 5px;
+	background-color: rgb(100, 181, 246);
+	box-shadow: 8px 8px 5px grey;
+	margin-bottom: 15px;
+	border-radius: 10px;
+}
+
+div#botoes {
+	margin-top: 10px;
+}
+</style>
 </head>
 
 <body>
@@ -103,7 +117,7 @@
 							<input type="hidden" value="0" name="valortotal" readonly="readonly">
 						</div>
 
-						<div>
+						<div id="botoes">
 							<button type="submit" class="btn">Confirmar Compra</button>
 							<button type="reset" class="btn">Cancelar</button>
 						</div>
