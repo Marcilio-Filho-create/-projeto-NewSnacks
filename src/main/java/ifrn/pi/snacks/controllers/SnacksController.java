@@ -175,7 +175,10 @@ public class SnacksController {
 	}
 	
 	@PostMapping("/cardapio/finalizarPedido")
-	public ModelAndView finalizarPedido(Pedido pedido, String email) {
+	public ModelAndView finalizarPedido(@Valid Pedido pedido, String email,BindingResult result ) {
+		if(result.hasErrors()) { 
+			return cardapio(); 
+		}
 		List<Item> itens = ir.findBySelecionado(true);
 		Usuario usuario = ur.findByEmail(email);
 		if(!itens.isEmpty() && usuario != null) {
@@ -200,7 +203,7 @@ public class SnacksController {
 	}
 	
 	@PostMapping("/cadastrar/salvar")
-	public String salvarUsuario(Usuario usuario, BindingResult result) {
+	public String salvarUsuario(@Valid Usuario usuario, BindingResult result) {
 		if(result.hasErrors()) { 
 			return cadastrar(); 
 		}
@@ -218,7 +221,7 @@ public class SnacksController {
 	}
 	
 	@PostMapping("/cadastroEspecial/salvar")
-	public String salvarUsuarioEspeciao(Usuario usuario, String tipo, BindingResult result) {
+	public String salvarUsuarioEspeciao(@Valid Usuario usuario, String tipo, BindingResult result) {
 		if(result.hasErrors()) { 
 			return cadastrarDetalhado(); 
 		}
