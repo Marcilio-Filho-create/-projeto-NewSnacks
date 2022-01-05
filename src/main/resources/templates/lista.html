@@ -15,7 +15,8 @@
 	url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 body {
-	background-image: url("fotos/fundo.jpg");
+	background-image:
+		url("https://images.pexels.com/photos/1956974/pexels-photo-1956974.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
 	background-color: #ffffff;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -35,6 +36,14 @@ li#login {
 	margin-right: 35px;
 	font-size: 100pt;
 }
+
+h1#titulo {
+	text-align: center;
+}
+
+div#pedidos {
+	border-radius: 15px;
+}
 </style>
 
 </head>
@@ -44,49 +53,50 @@ li#login {
 </head>
 <body>
 	<div th:replace="~{menu :: menu}"></div>
-	<h1>Lista de Pedidos</h1>
-	<div class="row">
-		<div class="col s12">
-			<div class="card">
-				<div class="card-content">
-					<span class="card-title">Lista de Pedidos:</span>
-					<table class="highlight">
+	<h1 id="titulo">Lista de Pedidos</h1>
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<div class="card" id="pedidos">
+					<div class="card-content">
+						<span class="card-title"></span>
+						<table class="highlight">
 
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Nome</th>
-								<th>Itens</th>
-								<th>Data</th>
-								<th>Horário</th>
-								<th>Valor</th>
-								<th>Endereço</th>
-							</tr>
-						</thead>
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Nome</th>
+									<th>Itens</th>
+									<th>Data</th>
+									<th>Horário</th>
+									<th>Valor</th>
+									<th>Endereço</th>
+								</tr>
+							</thead>
 
-						<tbody>
-							<tr th:each="p : ${pedidos}">
+							<tbody>
+								<tr th:each="p : ${pedidos}">
 
-								<td th:text="${p.id}">1</td>
-								<td th:text="${p.cliente.nome}">Sanduiche</td>
-								<td>
-									<ul th:each="i : ${p.itens}">
-										<li  th:text="${i.nome}"></li>
-									</ul>
-								</td>
-								<td th:text="${#temporals.format(p.data, 'dd/MM/yyyy')}">25/02/2021</td>
-								<td th:text="${p.horario}"></td>
-								<td>R$ <span th:text="${p.valortotal}">20,00</span></td>
-								<td th:text="${p.endereco}">Centro 15</td>
-							</tr>
+									<td th:text="${p.id}">1</td>
+									<td th:text="${p.cliente.nome}">Sanduiche</td>
+									<td>
+										<ul th:each="i : ${p.itens}">
+											<li th:text="${i.nome}"></li>
+										</ul>
+									</td>
+									<td th:text="${#temporals.format(p.data, 'dd/MM/yyyy')}">25/02/2021</td>
+									<td th:text="${p.horario}"></td>
+									<td>R$ <span th:text="${p.valortotal}">20,00</span></td>
+									<td th:text="${p.endereco}">Centro 15</td>
+								</tr>
 
-						</tbody>
-					</table>
+							</tbody>
+						</table>
 
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

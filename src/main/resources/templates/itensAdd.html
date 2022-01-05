@@ -1,113 +1,126 @@
 <!DOCTYPE html>
-	<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<title>Itens</title>
-		<style type="text/css">
-		@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-			body{
-				background-color:#ffffff;
-				background-size: cover;
-				background-repeat: no-repeat;
-				color:rgb(0, 0, 0);
-				font-family: Arial, sans-serif;
-			}
-					
-			nav#logo{
-				font-family:'Lobster', cursive;
-			}
-			a#nomeL{
-				margin-left: 35px;
-			}
-			li#menu{
-				margin-right: 35px;
-				font-size: 100pt;
-			}
-		</style>
-	</head>
-	<body>
-	
-		<div th:replace="~{menu :: menu}"></div>
-		<div class="container">
-			<div  sec:authorize="hasRole('ADICIONARITEM')" class="row">
-				<div class="col s12">
-					<div class="card">
-						<div class="card-content">
-							<span class="card-title">Adicionar Item:</span>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<title>Itens</title>
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-							<form action="/snacks/addItem/salvarItem" method="post" th:object="${item}">
-								<div>
-									<input type="hidden" th:field="*{id}" readonly="readonly">
-								</div>
-								<div>
-									<label>Nome: </label>
-									<p class="red-text text-darken-2" th:errors="*{nome}"></p>
-									<input type="text" th:field="*{nome}">
-								</div>
-								<div>
-									<label>Descrição: </label>
-									<p class="red-text text-darken-2" th:errors="*{descricao}"></p>
-									<textarea rows="100" cols="100" th:field="*{descricao}"></textarea>
-									
-								</div>
-								<div>
-									<label>Preço: </label>
-									<p class="red-text text-darken-2" th:errors="*{preco}"></p>
-									<input type="number" th:field="*{preco}">
-								</div>
-								<div>
-									<label>Tipo: </label>
-									<p class="red-text text-darken-2" th:errors="*{tipo}"></p>
-									<p>
-										<label>
-											<input class="with-gap" name="tipoItem" type="radio" th:field="*{tipo}" value="Bebida"/>
-											<span>Bebida</span>
-										</label>
-									</p>
-									<p>
-										<label>
-											<input class="with-gap" name="tipoItem" type="radio" th:field="*{tipo}" value="Sanduiche"/>
-											<span>Sanduíche</span>
-										</label>
-									</p>
-									<p>
-										<label>
-											<input class="with-gap" name="tipoItem" type="radio" th:field="*{tipo}" value="Prato"/>
-											<span>Prato</span>
-										</label>
-									</p>
-									<p>
-										<label>
-											<input class="with-gap" name="tipoItem" type="radio" th:field="*{tipo}" value="Pizza"/>
-											<span>Pizza</span>
-										</label>
-									</p>
-								</div>
-								<div>
-									<button type="submit" class="btn">Salvar</button>
-									<button type="reset" class="btn">Limpar</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
+body {
+	background-image:
+		url("https://images.pexels.com/photos/1956974/pexels-photo-1956974.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+	background-color: #ffffff;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: rgb(0, 0, 0);
+	font-family: 'Lobster', cursive;
+}
+
+nav#logo {
+	font-family: 'Lobster', cursive;
+}
+
+a#nomeL {
+	margin-left: 35px;
+}
+
+li#menu {
+	margin-right: 35px;
+	font-size: 100pt;
+}
+
+div#itensC {
+	border-radius: 15px;
+}
+
+div#botoes {
+	margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+	<div th:replace="~{menu :: menu}"></div>
+	<div class="container">
+		<div sec:authorize="hasRole('ADICIONARITEM')" class="row">
 			<div class="col s12">
 				<div class="card">
 					<div class="card-content">
+						<span class="card-title">Adicionar Item:</span>
+
+						<form action="/snacks/addItem/salvarItem" method="post"
+							th:object="${item}">
+							<div>
+								<input type="hidden" th:field="*{id}" readonly="readonly">
+							</div>
+							<div>
+								<label>Nome: </label>
+								<p class="red-text text-darken-2" th:errors="*{nome}"></p>
+								<input type="text" th:field="*{nome}">
+							</div>
+							<div>
+								<label>Descrição: </label>
+								<p class="red-text text-darken-2" th:errors="*{descricao}"></p>
+								<textarea rows="100" cols="100" th:field="*{descricao}"></textarea>
+
+							</div>
+							<div>
+								<label>Preço: </label>
+								<p class="red-text text-darken-2" th:errors="*{preco}"></p>
+								<input type="number" th:field="*{preco}">
+							</div>
+							<div>
+								<label>Tipo: </label>
+								<p class="red-text text-darken-2" th:errors="*{tipo}"></p>
+								<p>
+									<label> <input class="with-gap" name="tipoItem"
+										type="radio" th:field="*{tipo}" value="Bebida" /> <span>Bebida</span>
+									</label>
+								</p>
+								<p>
+									<label> <input class="with-gap" name="tipoItem"
+										type="radio" th:field="*{tipo}" value="Sanduiche" /> <span>Sanduíche</span>
+									</label>
+								</p>
+								<p>
+									<label> <input class="with-gap" name="tipoItem"
+										type="radio" th:field="*{tipo}" value="Prato" /> <span>Prato</span>
+									</label>
+								</p>
+								<p>
+									<label> <input class="with-gap" name="tipoItem"
+										type="radio" th:field="*{tipo}" value="Pizza" /> <span>Pizza</span>
+									</label>
+								</p>
+							</div>
+							<div id="botoes">
+								<button type="submit" class="btn">Salvar</button>
+								<button type="reset" class="btn">Limpar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<div class="card" id=itensC>
+					<div class="card-content">
 						<span class="card-title">Itens Cadastrados:</span>
-						<p th:if="${mensagem}" th:text="${mensagem}"> </p>
+						<p th:if="${mensagem}" th:text="${mensagem}"></p>
 						<table class="highlight">
 							<thead>
 								<tr>
-									<th>Id </th>
-									<th>Nome </th>
-									<th>Preço </th>
-									<th>Tipo </th>
+									<th>Id</th>
+									<th>Nome</th>
+									<th>Preço</th>
+									<th>Tipo</th>
 									<th>Cardápio</th>
 								</tr>
 							</thead>
@@ -118,18 +131,20 @@
 									<td>R$ <span th:text="${i.preco}">00</span></td>
 									<td th:text="${i.tipo}"></td>
 									<td th:text="${i.status}"></td>
-									<td>
-										<a th:href="@{/snacks/addItem/{id}/editarCardapio(id=${i.id})}"><i class="material-icons">view_list</i></a>
-										<a th:href="@{/snacks/addItem/{idI}/editar(idI=${i.id})}"><i class="material-icons">edit</i></a>
-										<a th:href="@{/snacks/addItem/{id}/deletar(id=${i.id})}"><i class="material-icons">delete_forever</i></a>
-									</td>
+									<td><a
+										th:href="@{/snacks/addItem/{id}/editarCardapio(id=${i.id})}"><i
+											class="material-icons">view_list</i></a> <a
+										th:href="@{/snacks/addItem/{idI}/editar(idI=${i.id})}"><i
+											class="material-icons">edit</i></a> <a
+										th:href="@{/snacks/addItem/{id}/deletar(id=${i.id})}"><i
+											class="material-icons">delete_forever</i></a></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			</div>
 		</div>
-	</body>
+	</div>
+</body>
 </html>
