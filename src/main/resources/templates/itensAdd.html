@@ -131,13 +131,11 @@ div#botoes {
 									<td>R$ <span th:text="${i.preco}">00</span></td>
 									<td th:text="${i.tipo}"></td>
 									<td th:text="${i.status}"></td>
-									<td><a
-										th:href="@{/snacks/addItem/{id}/editarCardapio(id=${i.id})}"><i
-											class="material-icons">view_list</i></a> <a
-										th:href="@{/snacks/addItem/{idI}/editar(idI=${i.id})}"><i
-											class="material-icons">edit</i></a> <a
-										th:href="@{/snacks/addItem/{id}/deletar(id=${i.id})}"><i
-											class="material-icons">delete_forever</i></a></td>
+									<td>
+										<a th:href="@{/snacks/addItem/{id}/editarCardapio(id=${i.id})}"><i class="material-icons">view_list</i></a>
+										<a sec:authorize="hasRole('ADICIONARITEM')" th:href="@{/snacks/addItem/{idI}/editar(idI=${i.id})}"><i class="material-icons">edit</i></a> 
+										<a sec:authorize="hasRole('ADICIONARITEM')" th:href="@{/snacks/addItem/{id}/deletar(id=${i.id})}"><i class="material-icons">delete_forever</i></a>
+									</td>
 								</tr>
 							</tbody>
 						</table>
