@@ -27,7 +27,6 @@ public class Pedido {
 	private Long id;
 	
 	@ManyToOne
-	@NotNull
 	private Usuario cliente;
 	
 	@ManyToMany
@@ -35,11 +34,8 @@ public class Pedido {
 	private List<Item> itens;
 	@NotNull
 	private Double valortotal;
-	@NotNull
 	private LocalDate data;
-	@NotNull
 	private LocalTime horario;
-	@NotBlank
 	private String endereco;
 	
 	public LocalTime getHorario() {
